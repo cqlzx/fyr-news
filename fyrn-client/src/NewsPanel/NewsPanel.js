@@ -1,4 +1,5 @@
 import React from 'react';
+import NewsCard from "../NewsCard/NewsCard";
 
 
 class NewsPanel extends React.Component {
@@ -50,7 +51,7 @@ class NewsPanel extends React.Component {
         const news_list = this.state.news.map((news) => {
             return (
                 <a className="collection-item" key={news.digest}>
-                    test
+                    <NewsCard news={news}/>
                 </a>
             );
         });
