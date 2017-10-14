@@ -11,6 +11,21 @@
 /*.news-title {*/
     /*font-size: ;*/
 /*}*/
+.news-title {
+    color: black;
+}
+
+.news-description {
+    color: #4f4f4f;
+}
+
+.news-tags {
+    margin-top: 20px;
+}
+
+.tag {
+    font-size: 1.2em;
+}
 
 .fill {
     display: flex;
