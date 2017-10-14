@@ -3,10 +3,11 @@ const path = require('path');
 const app = express();
 
 const index = require('./routes/index');
-
+const news = require('./routes/news');
 
 app.use('/static', express.static(path.join(__dirname, '../fyrn-client/build/static')));
 app.use('/', index);
+app.use('/news', news);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
