@@ -2,9 +2,9 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.js';
 
 import React from 'react';
-import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
-class LoginPage extends React.Component {
+class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +14,8 @@ class LoginPage extends React.Component {
         this.state = {
             user: {
                 email: '',
-                password: ''
+                password: '',
+                confirmPassword: ''
             },
             errors: {
                 // email: 'email error',
@@ -28,10 +29,16 @@ class LoginPage extends React.Component {
 
         const email = this.state.user.email;
         const password = this.state.user.password;
+        const confirmPassword = this.state.user.confirmPassword;
 
         console.log('email: ' + email);
         console.log('password: ' + password);
+        console.log('confirmPassword: ' + confirmPassword);
 
+
+        if (password !== confirmPassword) {
+            return;
+        }
         //TODO: submit form
     }
 
@@ -42,11 +49,19 @@ class LoginPage extends React.Component {
         user[field] = event.target.value;
 
         this.setState({user});
+
+        const errors = this.state.errors;
+        if (this.state.user.password !== this.state.user.confirmPassword) {
+            errors.confirmPassword = 'Password and Confirm Password don\'t match!';
+        } else {
+            errors.confirmPassword = '';
+        }
+        this.setState({errors});
     }
 
     render() {
         return (
-            <LoginForm
+            <SignUpForm
                 onSubmit={this.submitForm}
                 onChange={this.changeForm}
                 errors={this.state.errors}
@@ -56,4 +71,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default LoginPage;
+export default SignUpPage;
