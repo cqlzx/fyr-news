@@ -1,2 +1,5 @@
 #Ide
 .idea/
+
+#python
+*.pyc

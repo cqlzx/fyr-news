@@ -1,23 +1,32 @@
+""" Backend Service """
+
 import pyjsonrpc
+import operations
 
 HTTP_HOST = 'localhost'
 HTTP_PORT = 4040
 
+
 class RequestHandler(pyjsonrpc.HttpRequestHandler):
+    """ RPC Request Handler"""
 
     @pyjsonrpc.rpcmethod
-    def add(self, a, b):
+    def add(self, num1, num2):  # pylint: disable=no-self-use
         """Test method"""
-        return a + b
+        return num1 + num2
 
+    @pyjsonrpc.rpcmethod
+    def getOneNews(self):
+        """ Get one news from mongoDB"""
+        return operations.getOneNews()
 
 # Threading HTTP-Server
-http_server = pyjsonrpc.ThreadingHttpServer(
-    server_address = (HTTP_HOST, HTTP_PORT),
-    RequestHandlerClass = RequestHandler
+HTTP_SERVER = pyjsonrpc.ThreadingHttpServer(
+    server_address=(HTTP_HOST, HTTP_PORT),
+    RequestHandlerClass=RequestHandler
 )
 
 print "Starting HTTP server ..."
 print "URL: http://%s:%d" % (HTTP_HOST, HTTP_PORT)
 
-http_server.serve_forever()
+HTTP_SERVER.serve_forever()
