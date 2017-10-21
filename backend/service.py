@@ -16,9 +16,9 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
         return num1 + num2
 
     @pyjsonrpc.rpcmethod
-    def getOneNews(self):
+    def get_one_news(self):   # pylint: disable=no-self-use
         """ Get one news from mongoDB"""
-        return operations.getOneNews()
+        return operations.get_one_news()
 
 # Threading HTTP-Server
 HTTP_SERVER = pyjsonrpc.ThreadingHttpServer(
