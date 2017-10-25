@@ -16,7 +16,7 @@ def test_basic():
     database.test.drop()
     assert database.test.count() == 0
 
-    print 'basic test passed!'
+    print 'MongoDB client test passed!'
 
 
 if __name__ == '__main__':

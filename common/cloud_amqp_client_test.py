@@ -13,7 +13,7 @@ def test_basic():
     client.send_message(message_sent)
     message_received = client.get_message()
     assert message_sent == message_received
-    print 'test passed!'
+    print 'cloud amqp test passed!'
 
 
 if __name__ == '__main__':
