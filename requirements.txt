@@ -1,7 +1,9 @@
+numpy
 pika
 pymongo
 python-dateutil
 python-jsonrpc
 redis
 requests
+scipy
 sklearn
