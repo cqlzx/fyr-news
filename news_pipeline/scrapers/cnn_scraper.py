@@ -5,7 +5,7 @@ import sys
 
 from lxml import html
 
-CNN_CONTENT_XPATH = "//div[contains(@class, 'zn-body__paragraph')]//text() | //p[contains(@class, 'zn-body__paragraph')]//text()"
+CNN_CONTENT_XPATH = '''//div[contains(@class, 'zn-body__paragraph')]//text() | //p[contains(@class, 'zn-body__paragraph')]//text()'''
 
 USER_AGENTS_FILE = os.path.join(os.path.dirname(__file__), 'user_agents.txt')
 USER_AGENTS = []

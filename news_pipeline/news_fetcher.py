@@ -21,13 +21,12 @@ def handle_message(msg):
     if msg is None or not isinstance(msg, dict):
         print 'Invalid message!'
         return
-
     task = msg
     text = None
 
     if task['source'] == 'cnn':
         print 'Scaping CNN news'
-        text = cnn_scaper.get_news_from_url(task['url'])
+        text = cnn_scraper.get_news_from_url(task['url'])
     else:
         print 'News source [%s] is not supported' % task['source']
 
@@ -45,7 +44,7 @@ while True:
             try:
                 handle_message(message)
             except Exception:
-                print Exception
+                print Exception.message
                 pass
 
         scrape_queue_client.sleep(SLEEP_TIME_IN_SECONDS)

@@ -35,6 +35,9 @@ def get_news_by_sources(sources = DEFAULT_SOURCES, sortBy = SORT_BY_TOP):
             and response_json['status'] == 'ok'
             and response_json['source'] is not None):
 
+            for news in response_json['articles']:
+                news['source'] = response_json['source']
+
             articles.extend(response_json['articles'])
 
     return articles
