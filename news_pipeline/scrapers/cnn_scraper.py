@@ -16,7 +16,8 @@ with open(USER_AGENTS_FILE, 'rb') as uaf:
             USER_AGENTS.append(ua.strip()[1: -1])
 random.shuffle(USER_AGENTS)
 
-def getHeaders():
+
+def get_headers():
     ua = random.choice(USER_AGENTS)
     headers = {
         'User-Agent': ua
@@ -24,9 +25,9 @@ def getHeaders():
     return headers
 
 
-def getNewsFromUrl(news_url):
+def get_news_from_url(news_url):
     session = requests.session()
-    response = session.get(news_url, headers=getHeaders())
+    response = session.get(news_url, headers=get_headers())
 
     try:
         tree = html.fromstring(response.content)

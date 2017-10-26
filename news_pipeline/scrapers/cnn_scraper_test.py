@@ -5,7 +5,7 @@ PART_OF_NEWS = 'Since then, the administration has taken some steps to comply wi
 
 
 def test_basic():
-    news = cnn_scraper.getNewsFromUrl(NEWS_URL)
+    news = cnn_scraper.get_news_from_url(NEWS_URL)
 
     print news
     assert PART_OF_NEWS in news

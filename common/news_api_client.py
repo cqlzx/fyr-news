@@ -16,11 +16,11 @@ SORT_BY_LATEST = 'latest'
 DEFAULT_SOURCES = [CNN]
 
 
-def buildUrl(endpoint = NEWS_API_ENDPOINT, api_name = ARTICLE_API):
+def build_url(endpoint = NEWS_API_ENDPOINT, api_name = ARTICLE_API):
     return endpoint + api_name
 
 
-def getNewsBySources(sources = DEFAULT_SOURCES, sortBy = SORT_BY_TOP):
+def get_news_by_sources(sources = DEFAULT_SOURCES, sortBy = SORT_BY_TOP):
     articles = []
     for source in sources:
         payload = {
@@ -28,7 +28,7 @@ def getNewsBySources(sources = DEFAULT_SOURCES, sortBy = SORT_BY_TOP):
             'sortBy': sortBy,
             'apiKey': NEWS_API_KEY
         }
-        response = requests.get(buildUrl(), params=payload)
+        response = requests.get(build_url(), params=payload)
         response_json = loads(response.content)
 
         if (response_json is not None

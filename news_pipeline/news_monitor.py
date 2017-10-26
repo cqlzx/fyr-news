@@ -17,17 +17,17 @@ SLEEP_TIME_IN_SECONDS = 10
 TIME_OUT_IN_SECONDS = 24 * 60 * 60
 
 FYR_NEWS_QUEUE_URL = 'amqp://mlcafzrx:i3YEi-GptkW4ntHLh0mTV_zzc9qs4hGU@donkey.rmq.cloudamqp.com/mlcafzrx'
-FYR_NEWS_QUEUE_NAME = 'fyr-news-api-news'
+SCRAPE_TASK_QUEUE = 'fyr-news-scrape-task'
 
 NEWS_SOURCE = [
     'cnn'
 ]
 
 redis_client = redis.StrictRedis(REDIS_CLIENT, REDIS_PORT)
-cloudAmqpClient = CloudAmqpClient(FYR_NEWS_QUEUE_URL, FYR_NEWS_QUEUE_NAME)
+cloudAmqpClient = CloudAmqpClient(FYR_NEWS_QUEUE_URL, SCRAPE_TASK_QUEUE)
 
 while True:
-    news_list = news_api_client.getNewsBySources(NEWS_SOURCE)
+    news_list = news_api_client.get_news_by_sources(NEWS_SOURCE)
 
     num_of_new_news = 0
 

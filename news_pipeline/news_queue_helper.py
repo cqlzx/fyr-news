@@ -10,7 +10,8 @@ from cloud_amqp_client import CloudAmqpClient
 FYR_NEWS_QUEUE_URL = 'amqp://mlcafzrx:i3YEi-GptkW4ntHLh0mTV_zzc9qs4hGU@donkey.rmq.cloudamqp.com/mlcafzrx'
 FYR_NEWS_QUEUE_NAME = 'fyr-news-api-news'
 
-def clearQueue(queue_url, queue_name):
+
+def clear_queue(queue_url, queue_name):
     cloud_amqp_client = CloudAmqpClient(queue_url, queue_name)
 
     num_of_messages = 0
@@ -26,4 +27,4 @@ def clearQueue(queue_url, queue_name):
 
 
 if __name__ == '__main__':
-    clearQueue(FYR_NEWS_QUEUE_URL, FYR_NEWS_QUEUE_NAME)
+    clear_queue(FYR_NEWS_QUEUE_URL, FYR_NEWS_QUEUE_NAME)
