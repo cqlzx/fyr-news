@@ -20,7 +20,17 @@ FYR_NEWS_QUEUE_URL = 'amqp://mlcafzrx:i3YEi-GptkW4ntHLh0mTV_zzc9qs4hGU@donkey.rm
 SCRAPE_TASK_QUEUE = 'fyr-news-scrape-task'
 
 NEWS_SOURCE = [
-    'cnn'
+    'bbc-news',
+    'bbc-sport',
+    'bloomberg',
+    'cnn',
+    'entertainment-weekly',
+    'espn',
+    'ign',
+    'techcrunch',
+    'the-new-york-times',
+    'the-wall-street-journal',
+    'the-washington-post'
 ]
 
 redis_client = redis.StrictRedis(REDIS_CLIENT, REDIS_PORT)
