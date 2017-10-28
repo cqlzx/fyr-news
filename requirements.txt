@@ -1,3 +1,4 @@
+newspaper
 numpy
 pika
 pymongo
