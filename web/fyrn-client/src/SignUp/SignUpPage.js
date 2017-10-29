@@ -2,11 +2,12 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.js';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import SignUpForm from './SignUpForm';
 
 class SignUpPage extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.submitForm = this.submitForm.bind(this);
         this.changeForm = this.changeForm.bind(this);
@@ -39,7 +40,32 @@ class SignUpPage extends React.Component {
         if (password !== confirmPassword) {
             return;
         }
-        //TODO: submit form
+
+        fetch('http://localhost:3000/auth/signup', {
+            method: 'POST',
+            cache: false,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'email': this.state.user.email,
+                'password': this.state.user.password
+            })
+        }).then(response => {
+            if (response === 200) {
+                this.setState({error: {}});
+
+                this.context.router.replace('login');
+            } else {
+                response.json().then(data => {
+                    console.log(data);
+                    const errors = data.error ? data.error : {};
+                    errors.summary = data.message;
+                    this.setState({errors});
+                })
+            }
+        })
     }
 
     changeForm(event) {
@@ -70,5 +96,9 @@ class SignUpPage extends React.Component {
         );
     }
 }
+
+SignUpPage.contextType = {
+    router: PropTypes.object.isRequired
+};
 
 export default SignUpPage;
