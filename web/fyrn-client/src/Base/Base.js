@@ -5,20 +5,25 @@ import './Base.css';
 
 const Base = ({ children }) => (
     <div>
-        <nav>
+        <nav className="nav-bar indigo lighten-1">
             <div className="nav-wrapper">
-              <a href="#" className="brand-logo">FYR News</a>
+              <a href="/" className="brand-logo">FYR News</a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                   {
-                      Auth.isAuthenticated() ? (
-                          <li><a>{Auth.getEmail()}</a></li>
-                          <li><a href="logout">Log out</a></li>
-                      )
-                      :
-                      (
-                          <li><a href="/login"></a></li>
-                          <li><a href="/signup"></a></li>
-                      )
+                      Auth.isAuthenticated() ?
+                          (
+                          <div>
+                              <li><a>{Auth.getEmail()}</a></li>
+                              <li><a href="logout">Log out</a></li>
+                         </div>
+                          )
+                          :
+                          (
+                          <div>
+                              <li><a href="/login">Log In</a></li>
+                              <li><a href="/signup">Sign Up</a></li>
+                          </div>
+                          )
                   }
               </ul>
             </div>
