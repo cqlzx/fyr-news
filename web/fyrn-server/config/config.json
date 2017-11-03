@@ -1,0 +1,4 @@
+{
+  "mongoDbUri": "mongodb://root:123@ds139904.mlab.com:39904/dbcoj",
+  "jwtSecret": "this is the secret key!!!!!"
+}
