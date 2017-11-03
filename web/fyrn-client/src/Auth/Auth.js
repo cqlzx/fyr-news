@@ -14,11 +14,11 @@ class Auth {
     }
 
     static getToken() {
-        localStorage.getItem('token');
+        return localStorage.getItem('token');
     }
 
     static getEmail() {
-        localStorage.getItem('email');
+        return localStorage.getItem('email');
     }
 }
 

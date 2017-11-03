@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
                 response.json().then(data => {
                    const error = data.error ? data.error : {};
                    error.summary = data.message;
-                   this.setSate({error});
+                   this.setState({error});
                 });
             }
         });
@@ -88,7 +88,7 @@ class LoginPage extends React.Component {
     }
 }
 
-LoginPage.contextType = {
+LoginPage.contextTypes = {
     router: PropTypes.object.isRequired
 };
 

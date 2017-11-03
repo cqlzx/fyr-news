@@ -1,15 +1,18 @@
-const AuthCheckMiddleware = require('./middleware/auth_checker');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
-const app = express();
 
+const app = express();
+app.use(bodyParser.json());
 const config = require('./config/config.json');
 require('./models/main').connect(config.mongoDbUri);
 
+const AuthCheckMiddleware = require('./middleware/auth_checker');
 
 const passport = require('passport');
 
+const auth = require('./routes/auth');
 const index = require('./routes/index');
 const news = require('./routes/news');
 
@@ -26,9 +29,11 @@ app.use(cors());
 
 app.use('/static', express.static(path.join(__dirname, '../fyrn-client/build/static')));
 app.use('/', index);
+app.use('/auth', auth);
 app.use('/news', AuthCheckMiddleware);
 app.use('/news', news);
 
+app.use('*', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

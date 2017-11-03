@@ -1,4 +1,4 @@
-const mongoose = require('mongooese');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.comparePassword = function(password, callback) {
+    console.log(password);
+    console.log(this.password);
     bcrypt.compare(password, this.password, callback);
 };
 

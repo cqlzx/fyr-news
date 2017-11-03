@@ -14,7 +14,7 @@ const Base = ({ children }) => (
                           (
                           <div>
                               <li><a>{Auth.getEmail()}</a></li>
-                              <li><a href="logout">Log out</a></li>
+                              <li><a href="/logout">Log out</a></li>
                          </div>
                           )
                           :
