@@ -4,7 +4,6 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-app.use(bodyParser.json());
 const config = require('./config/config.json');
 require('./models/main').connect(config.mongoDbUri);
 
@@ -12,6 +11,7 @@ const AuthCheckMiddleware = require('./middleware/auth_checker');
 
 const passport = require('passport');
 
+app.use(bodyParser.json());
 const auth = require('./routes/auth');
 const index = require('./routes/index');
 const news = require('./routes/news');

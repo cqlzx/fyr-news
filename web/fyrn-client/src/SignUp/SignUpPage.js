@@ -53,10 +53,10 @@ class SignUpPage extends React.Component {
                 'password': this.state.user.password
             })
         }).then(response => {
-            if (response === 200) {
+            if (response.status === 200) {
                 this.setState({error: {}});
 
-                this.context.router.replace('login');
+                this.context.router.replace('/login');
             } else {
                 response.json().then(data => {
                     console.log(data);

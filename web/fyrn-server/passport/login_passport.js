@@ -28,6 +28,7 @@ module.exports = new PassportLocalStrategy({
             return done(error);
         }
 
+
         return user.comparePassword(userData.password, (passwordError, isMatched) => {
             if (passwordError) {
                 return done(passwordError);
@@ -37,6 +38,8 @@ module.exports = new PassportLocalStrategy({
                 const error = new Error('Incorrect email or password.');
 
                 error.name = 'IncorrectCredentialErrors';
+
+                return done(error);
             }
 
             const payload = {
