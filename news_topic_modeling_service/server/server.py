@@ -24,7 +24,7 @@ SERVER_PORT = 6060
 MODEL_DIR = '../model'
 MODEL_UPDATE_LAG_IN_SECONDS = 10
 
-N_CLASSES = 8;
+N_CLASSES = 8
 
 VARS_FILE = '../model/vars'
 VOCAB_PROCESSOR_SAVE_FILE = '../model/vocab_procesor_save_file'
@@ -51,7 +51,7 @@ def loadModel():
         model_fn=news_cnn_model.generate_cnn_model(N_CLASSES, n_words),
         model_dir=MODEL_DIR)
     # Prepare training and testing
-    df = pd.read_csv('../data/labeled_news.csv', header=None)
+    df = pd.read_csv('../data/news_labeled.csv', header=None)
 
     # TODO: fix this until https://github.com/tensorflow/tensorflow/issues/5548 is solved.
     # We have to call evaluate or predict at least once to make the restored Estimator work.
@@ -67,6 +67,7 @@ restoreVars()
 loadModel()
 
 print "Model loaded"
+
 
 class ReloadModelHandler(FileSystemEventHandler):
     def on_any_event(self, event):
