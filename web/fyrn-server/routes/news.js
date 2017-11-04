@@ -16,8 +16,8 @@ router.get('/userId/:userId/pageNum/:pageNum', function(req, res) {
 router.post('/userId/:userId/newsId/:newsId', function(req, res, next) {
     console.log('logging news click');
 
-    userId = res.params['userId'];
-    newsId = res.params['newsId'];
+    userId = req.params['userId'];
+    newsId = req.params['newsId'];
 
     rpc_client.logNewsClickForUser(userId, newsId);
     res.status(200);

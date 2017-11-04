@@ -8,7 +8,7 @@ FILTER_SHAPE2 = [WINDOW_SIZE, N_FILTERS]
 POOLING_WINDOW = 4
 POOLING_STRIDE = 2
 
-LEARNING_RATE = 0.15
+LEARNING_RATE = 0.001
 
 def generate_cnn_model(n_classes, n_words):
     """2 layer ConvNet to predict from sequence of words to a class."""

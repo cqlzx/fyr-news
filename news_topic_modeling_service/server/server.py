@@ -93,6 +93,7 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
         topic = news_classes.class_map[str(y_predicted[0])]
         return topic
 
+
 # Setup watchdog
 observer = Observer()
 observer.schedule(ReloadModelHandler(), path=MODEL_DIR, recursive=False)

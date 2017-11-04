@@ -8,7 +8,7 @@ class NewsCard extends React.Component {
         this.directToUrl = this.directToUrl.bind(this);
     }
 
-    directToUrl(url) {
+    directToUrl(event) {
         event.preventDefault();
         this.sendClickLog();
         window.open(this.props.news.url, '_blank');

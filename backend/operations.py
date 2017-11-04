@@ -15,7 +15,7 @@ import news_recommendation_service_client
 
 from cloud_amqp_client import CloudAmqpClient
 
-NEWS_TABLE_NAME = 'news'
+NEWS_TABLE_NAME = 'test-news'
 LOG_CLICK_TABLE_NAME = 'click_logs'
 NEWS_LIST_SIZE = 10
 NEWS_LIMIT = 200
@@ -86,4 +86,4 @@ def log_news_click_for_user(user_id, news_id):
 
     # Send log task to machine learning service for prediction
     message = {'userId': user_id, 'newsId': news_id, 'timestamp': str(datetime.utcnow())}
-    cloudAMQP_client.sendMessage(message)
+    cloudAMQP_client.send_message(message)

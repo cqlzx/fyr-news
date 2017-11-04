@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 from cloud_amqp_client import CloudAmqpClient
+import news_topic_modeling_service_client
 import mongodb_client
 
 DB_COLLECTION_NAME = 'test-news'
@@ -58,6 +59,12 @@ def handle_message(message):
                 return
 
     task['publishedAt'] = parser.parse(task['publishedAt'])
+
+    title = task['title']
+    if title is None:
+        title = task['description']
+    topic = news_topic_modeling_service_client.classify(title)
+    task['class'] = topic
 
     db[DB_COLLECTION_NAME].replace_one({'digest': task['digest']}, task, upsert = True)
 

@@ -34,7 +34,7 @@ FYR_NEWS_QUEUE_URL = 'amqp://mlcafzrx:i3YEi-GptkW4ntHLh0mTV_zzc9qs4hGU@donkey.rm
 LOG_CLICK_QUEUE = 'fyr-news-log-click-task'
 
 PREFERENCE_MODEL_TABLE_NAME = "user_preference_model"
-NEWS_TABLE_NAME = "news"
+NEWS_TABLE_NAME = "test-news"
 
 cloudAMQP_client = CloudAmqpClient(FYR_NEWS_QUEUE_URL, LOG_CLICK_QUEUE)
 
@@ -95,7 +95,7 @@ def handle_message(msg):
 def run():
     while True:
         if cloudAMQP_client is not None:
-            msg = cloudAMQP_client.getMessage()
+            msg = cloudAMQP_client.get_message()
             if msg is not None:
                 # Parse and process the task
                 try:
