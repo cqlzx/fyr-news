@@ -20,6 +20,12 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
         """ Get one news from mongoDB"""
         return operations.get_one_news()
 
+    @pyjsonrpc.rpcmethod
+    def get_news_summaries_for_user(self, user_id, page_num):   # pylint: disable=no-self-use
+        """ Get news summaries for user"""
+        print 'get summaries for user is called!'
+        return operations.get_news_summaries_for_user(user_id, page_num)
+
 # Threading HTTP-Server
 HTTP_SERVER = pyjsonrpc.ThreadingHttpServer(
     server_address=(HTTP_HOST, HTTP_PORT),
