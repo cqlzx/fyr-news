@@ -1,20 +1,38 @@
 import React from 'react';
+import Auth from '../Auth/Auth';
 import './NewsCard.css';
 
 class NewsCard extends React.Component {
     constructor(news) {
         super();
+        this.directToUrl = this.directToUrl.bind(this);
     }
 
     directToUrl(url) {
-        window.open(url, '_blank');
+        event.preventDefault();
+        this.sendClickLog();
+        window.open(this.props.news.url, '_blank');
+    }
+
+    sendClickLog() {
+        const url = 'http://localhost:3000/news/userId/' + Auth.getEmail()
+                  + '/newsId/' + this.props.news.digest;
+
+        const request = new Request(encodeURI(url), {
+          method: 'POST',
+          headers: {
+            'Authorization': 'bearer ' + Auth.getToken(),
+          },
+          cache: false});
+
+        fetch(request);
     }
 
     render() {
         const news = this.props.news;
 
         return (
-            <div className="news-container" onClick={() => this.directToUrl(news.url)}>
+            <div className="news-container" onClick={this.directToUrl}>
                 <div className="row">
                     <div className="col s4 fill">
                         <img className="news-image" src={news.urlToImage} alt="Not showing"/>

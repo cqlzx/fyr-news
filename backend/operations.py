@@ -12,8 +12,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client # pylint: disable=import-error
 
+from cloud_amqp_client import CloudAmqpClient
 
 NEWS_TABLE_NAME = 'news'
+LOG_CLICK_TABLE_NAME = 'click_logs'
 NEWS_LIST_SIZE = 10
 NEWS_LIMIT = 200
 
@@ -22,8 +24,11 @@ USER_NEWS_TIME_OUT_IN_SECONDS = 3600
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 
-redis_client = redis.StrictRedis(REDIS_HOST, REDIS_PORT, db=0)
+FYR_NEWS_QUEUE_URL = 'amqp://mlcafzrx:i3YEi-GptkW4ntHLh0mTV_zzc9qs4hGU@donkey.rmq.cloudamqp.com/mlcafzrx'
+LOG_CLICK_QUEUE = 'fyr-news-log-click-task'
 
+redis_client = redis.StrictRedis(REDIS_HOST, REDIS_PORT, db=0)
+cloudAMQP_client = CloudAmqpClient(FYR_NEWS_QUEUE_URL, LOG_CLICK_QUEUE)
 
 def get_one_news():
     """ Get one news from mongoDB """
@@ -62,3 +67,14 @@ def get_news_summaries_for_user(user_id, page_num):
             news['time'] = 'today'
 
     return json.loads(dumps(sliced_news))
+
+
+def log_news_click_for_user(user_id, news_id):
+    message = {'userId': user_id, 'newsId': news_id, 'timestamp': datetime.utcnow()}
+
+    db = mongodb_client.get_db()
+    db[LOG_CLICK_TABLE_NAME].insert(message)
+
+    # Send log task to machine learning service for prediction
+    message = {'userId': user_id, 'newsId': news_id, 'timestamp': str(datetime.utcnow())}
+    cloudAMQP_client.sendMessage(message)

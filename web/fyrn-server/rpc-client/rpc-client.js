@@ -9,8 +9,8 @@ const client = jayson.client.http({
 // invoke "add"
 
 function add(num1, num2, callback) {
-    client.request('add', [num1, num2], function(err, response) {
-        if(err) throw err;
+    client.request('add', [num1, num2], function (err, response) {
+        if (err) throw err;
         console.log(response.result); // 2
         callback(response.result);
     });
@@ -25,7 +25,16 @@ function getNewsSummariesForUser(userId, pageNum, callback) {
     })
 }
 
+// Log a news click event for a user
+function logNewsClickForUser(user_id, news_id) {
+    client.request('logNewsClickForUser', [user_id, news_id], function (err, error, response) {
+        if (err) throw err;
+        console.log(response);
+    });
+}
+
 module.exports = {
     add: add,
-    getNewsSummariesForUser: getNewsSummariesForUser
+    getNewsSummariesForUser: getNewsSummariesForUser,
+    logNewsClickForUser: logNewsClickForUser
 };

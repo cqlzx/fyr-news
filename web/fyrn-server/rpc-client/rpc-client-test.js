@@ -8,3 +8,6 @@ client.add(1, 2, (res) => {
 client.getNewsSummariesForUser('test_user', 1, (response) => {
     console.assert(response !== null);
 });
+
+// Invoke "logNewsClickForUser"
+client.logNewsClickForUser('test_user', 'test_news');

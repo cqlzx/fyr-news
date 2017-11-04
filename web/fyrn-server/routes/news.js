@@ -8,9 +8,19 @@ router.get('/userId/:userId/pageNum/:pageNum', function(req, res) {
     userId = req.params['userId'];
     pageNum = req.params['pageNum'];
 
-    rpc_client.getNewsSummariesForUser(userId, pageNum, (res) => {
-        res.json(res);
+    rpc_client.getNewsSummariesForUser(userId, pageNum, (response) => {
+        res.json(response);
     });
+});
+
+router.post('/userId/:userId/newsId/:newsId', function(req, res, next) {
+    console.log('logging news click');
+
+    userId = res.params['userId'];
+    newsId = res.params['newsId'];
+
+    rpc_client.logNewsClickForUser(userId, newsId);
+    res.status(200);
 });
 
 module.exports = router;

@@ -47,7 +47,7 @@ class NewsPanel extends React.Component {
                 }
 
                 this.setState({
-                    news: this.state.news ? this.state.news.concat(news) : news
+                    news: this.state.news ? this.state.news.concat(news) : news,
                     pageNum: this.state.pageNum + 1
                 })
             })

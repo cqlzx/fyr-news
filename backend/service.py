@@ -23,8 +23,15 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
     @pyjsonrpc.rpcmethod
     def get_news_summaries_for_user(self, user_id, page_num):   # pylint: disable=no-self-use
         """ Get news summaries for user"""
-        print 'get summaries for user is called!'
+        print 'get summaries for user is called! with %s and %s' % (user_id, page_num)
         return operations.get_news_summaries_for_user(user_id, page_num)
+
+    @pyjsonrpc.rpcmethod
+    def log_news_click_for_user(self, user_id, news_id):   # pylint: disable=no-self-use
+        """ log news click for user"""
+        print 'log news click for user is called with %s and %s' % (user_id, news_id)
+        return operations.log_news_click_for_user(user_id, news_id)
+
 
 # Threading HTTP-Server
 HTTP_SERVER = pyjsonrpc.ThreadingHttpServer(
