@@ -11,6 +11,7 @@ from bson.json_util import dumps
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client # pylint: disable=import-error
+import news_recommendation_service_client
 
 from cloud_amqp_client import CloudAmqpClient
 
@@ -59,10 +60,18 @@ def get_news_summaries_for_user(user_id, page_num):
 
         sliced_news = total_news[begin_index: end_index]
 
+    # Get preference for user
+    preference = news_recommendation_service_client.getPreferenceForUser(user_id)
+    topPreference = None
+
+    if preference is not None and len(preference) > 0:
+        topPreference = preference[0]
 
     for news in sliced_news:
         # Remove text from news
         del news['text']
+        if news['class'] == topPreference:
+            news['reason'] = 'Recommend'
         if news['publishedAt'].date() == datetime.today().date():
             news['time'] = 'today'
 
