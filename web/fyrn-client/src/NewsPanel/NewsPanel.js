@@ -8,7 +8,7 @@ class NewsPanel extends React.Component {
         super();
 
         this.handleScroll = this.handleScroll.bind(this);
-        this.state = {news: null};
+        this.state = {news: null, pageNum: 1, loadedAll: false};
     }
 
     componentDidMount() {
@@ -26,7 +26,11 @@ class NewsPanel extends React.Component {
     }
 
     loadMoreNews() {
-        let url = 'http://' + window.location.host + '/news';
+        if (this.state.loadedAll) {
+            return;
+        }
+
+        let url = 'http://' + window.location.host + '/news/userId/' + Auth.getEmail() + '/pageNum/' + this.state.pageNum;
         const request = new Request(url, {
             method: 'GET',
             cache: false,
@@ -38,8 +42,13 @@ class NewsPanel extends React.Component {
         fetch(request)
             .then((res) => res.json())
             .then((news) => {
+                if (!news || news.length === 0) {
+                    this.setState({loadedAll: true});
+                }
+
                 this.setState({
                     news: this.state.news ? this.state.news.concat(news) : news
+                    pageNum: this.state.pageNum + 1
                 })
             })
     }

@@ -17,6 +17,15 @@ function add(num1, num2, callback) {
 }
 
 
+function getNewsSummariesForUser(userId, pageNum, callback) {
+    client.request('get_news_summaries_for_user', [userId, pageNum], (err, error, response) => {
+        if (err) throw err;
+        console.log(response);
+        callback(response);
+    })
+}
+
 module.exports = {
-    add: add
+    add: add,
+    getNewsSummariesForUser: getNewsSummariesForUser
 };
